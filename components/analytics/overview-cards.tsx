@@ -1,5 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSign, Users, CreditCard, TrendingUp } from "lucide-react"
+import { useEffect, useState } from "react";
+import { firestore } from '../../firebase';
+import { collection, getDocs } from "firebase/firestore";
 
 const cards = [
   {
@@ -33,6 +36,25 @@ const cards = [
 ]
 
 export function OverviewCards() {
+  const [items, setItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const querySnapshot = await getDocs(collection(firestore, 'Farm'));
+      const fetchedItems: any[] = [];
+      querySnapshot.forEach((doc) => {
+        fetchedItems.push({ id: doc.id, ...doc.data() });
+      });
+      loading && console.log("Fetched items:", fetchedItems);
+      setItems(fetchedItems);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       {cards.map((card) => (
@@ -43,6 +65,14 @@ export function OverviewCards() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{card.amount}</div>
+            <div className="text-sm text-muted-foreground">
+              {items.map((item) => (
+                <div key={item.id} className="flex items-center justify-between">
+                  <span>{item.name}</span>
+                  <span>{item.value}</span>
+                </div>
+              ))}
+            </div>
             <p className="text-xs text-muted-foreground">{card.description}</p>
             <div
               className={`mt-2 flex items-center text-xs ${card.trend === "up" ? "text-green-500" : "text-red-500"}`}
