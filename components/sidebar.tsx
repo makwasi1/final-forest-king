@@ -27,11 +27,11 @@ import { ForestLogo } from "./forest-logo"
 
 const navigation = [
   { name: "Dashboard", href: "/analytics", icon: Home },
-  { name: "Farms", href: "/projects", icon: Folder },
+  { name: "Farms", href: "/farm", icon: Folder },
   { name: "Transactions", href: "/transactions", icon: Wallet },
-  { name: "Activities", href: "/invoices", icon: Receipt },
+  { name: "Activities", href: "/activity", icon: Receipt },
   { name: "Payments", href: "/payments", icon: CreditCard },
-  { name: "Members", href: "/members", icon: Users2 },
+  { name: "Supervisors", href: "/supervisor", icon: Users2 },
 ];
 
 const bottomNavigation = [

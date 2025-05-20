@@ -45,7 +45,7 @@ export function OverviewTab() {
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Recent Transactions</CardTitle>
+            <CardTitle className="text-xl font-semibold">Supervisors</CardTitle>
           </CardHeader>
           <CardContent>
             <RecentTransactions />

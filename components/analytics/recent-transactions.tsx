@@ -1,5 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent } from "@/components/ui/card"
+import { firestore } from "@/firebase";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const recentTransactions = [
   {
@@ -52,26 +55,41 @@ const recentTransactions = [
 ]
 
 export function RecentTransactions() {
+  const [supervisor, setSupervisor] = useState<any[]>([]);
+
+  useEffect(() => {
+      async function fetchSupervisorData() {
+        const querySnapshot = await getDocs(collection(firestore, 'Supervisor'));
+        const fetchedItems: any[] = [];
+        querySnapshot.forEach((doc) => {
+          fetchedItems.push({ id: doc.id, ...doc.data() });
+        });
+        setSupervisor(fetchedItems.slice(0, 5)); // Limit to 5 items
+      }
+      fetchSupervisorData();
+    }, []);
+
+
   return (
     <div className="space-y-4">
-      {recentTransactions.map((transaction) => (
+      {supervisor.map((transaction) => (
         <Card key={transaction.id} className="p-4">
           <CardContent className="flex items-center p-0">
             <Avatar className="h-10 w-10">
-              <AvatarImage src={transaction.avatar} alt={transaction.name} />
-              <AvatarFallback>{transaction.name.charAt(0)}</AvatarFallback>
+              <AvatarImage src={"https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5295.jpg-fLw0wGGZp8wuTzU5dnyfjZDwAHN98a.jpeg"} alt={transaction.name} />
+              
             </Avatar>
             <div className="ml-4 flex-1 space-y-1">
               <p className="text-sm font-medium leading-none">{transaction.name}</p>
               <p className="text-xs text-muted-foreground">{transaction.email}</p>
             </div>
             <div className="ml-auto text-right">
-              <p
+              {/* <p
                 className={`text-sm font-medium ${transaction.amount.startsWith("+") ? "text-green-500" : "text-red-500"}`}
               >
                 {transaction.amount}
-              </p>
-              <p className="text-xs text-muted-foreground">{transaction.date}</p>
+              </p> */}
+              <p className="text-xs text-muted-foreground">{transaction.role}</p>
             </div>
           </CardContent>
         </Card>
