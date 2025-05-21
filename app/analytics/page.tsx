@@ -30,7 +30,6 @@ export default function AnalyticsPage() {
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview">Forest Overview</TabsTrigger>
-          <TabsTrigger value="analytics">Growth Analytics</TabsTrigger>
           <TabsTrigger value="reports">Forest Reports</TabsTrigger>
           <TabsTrigger value="notifications">Forest Alerts</TabsTrigger>
         </TabsList>
