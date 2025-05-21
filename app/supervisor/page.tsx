@@ -54,7 +54,7 @@ export default function FarmsPage() {
     { key: "name", label: "Name", type: "text" as const },
     { key: "email", label: "Email", type: "text" as const },
     { key: "role", label: "Role", type: "select" as const, options: [{ value: "admin", label: "Admin" }, { value: "supervisor", label: "Supervisor" }, { value: "labour", label: "Labour" }] },
-    { key: "is_active", label: "Status", type: "select" as const, options: [{ value: true, label: "Active" }, { value: false, label: "Inactive" }] },
+    { key: "is_active", label: "Status", type: "select" as const, options: [{ value: "1", label: "Active" }, { value: "0", label: "Inactive" }] },
     { key: "userId", label: "User ID", type: "text" as const },
   ];
 
