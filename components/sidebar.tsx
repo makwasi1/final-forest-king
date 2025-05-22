@@ -5,16 +5,11 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   Home,
-  BarChart2,
-  Building2,
   Folder,
   Wallet,
   Receipt,
   CreditCard,
   Users2,
-  Shield,
-  MessagesSquare,
-  Video,
   Settings,
   HelpCircle,
   Menu,
@@ -29,7 +24,7 @@ const navigation = [
   { name: "Dashboard", href: "/analytics", icon: Home },
   { name: "Farms", href: "/farm", icon: Folder },
   { name: "Transactions", href: "/transactions", icon: Wallet },
-  { name: "Activities", href: "/activity", icon: Receipt },
+  { name: "Operations", href: "/activity", icon: Receipt },
   { name: "Payments", href: "/payments", icon: CreditCard },
   { name: "Supervisors", href: "/supervisor", icon: Users2 },
 ];

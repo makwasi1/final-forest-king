@@ -1,11 +1,11 @@
 import { CheckCircle2 } from "lucide-react"
 
 const topProducts = [
-  { name: "Savings Account", revenue: "$1,200,000", growth: "+12%" },
-  { name: "Credit Card", revenue: "$980,000", growth: "+8%" },
-  { name: "Personal Loan", revenue: "$850,000", growth: "+15%" },
-  { name: "Mortgage", revenue: "$2,300,000", growth: "+5%" },
-  { name: "Investment Fund", revenue: "$1,800,000", growth: "+20%" },
+  { name: "Savings Account", revenue: "ZAR 1,200,000", growth: "+12%" },
+  { name: "Credit Card", revenue: "ZAR 980,000", growth: "+8%" },
+  { name: "Personal Loan", revenue: "ZAR 850,000", growth: "+15%" },
+  { name: "Mortgage", revenue: "ZAR 2,300,000", growth: "+5%" },
+  { name: "Investment Fund", revenue: "ZAR 1,800,000", growth: "+20%" },
 ]
 
 export function TopProducts() {

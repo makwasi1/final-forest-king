@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { DollarSign, Users, CreditCard, TrendingUp, LandPlot } from "lucide-react"
+import {  Users, CreditCard, TrendingUp, LandPlot } from "lucide-react"
 import { getCollectionCounts } from "@/services/firestoreService";
 
 

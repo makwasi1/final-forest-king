@@ -1,33 +1,31 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { collection, getDocs, deleteDoc, doc, addDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, addDoc, updateDoc } from "firebase/firestore";
 
 import { CollectionTable } from "@/components/ui/collection-table";
 import { getCollectionData } from "@/services/firestoreService";
 import { firestore } from "@/firebase";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { CreateItemModal } from "@/components/create-items";
-
-
+import { ItemModal } from "@/components/create-items";
+import { AlertDialogHeader, AlertDialogFooter } from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@radix-ui/react-alert-dialog";
+`import { CreateItemModal } from "@/components/create-items";`
 
 
 export default function FarmsPage() {
-  const [farms, setFarms] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isFarmModalOpen, setFarmModalOpen] = useState(false);
-
-const farmFields = [
-  { key: "name", label: "Farm Name", type: "text" as const },
-  { key: "location", label: "Location", type: "text" as const },
-  { key: "size", label: "Size (acres)", type: "number" as const },
-]
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [selectedId, setSelectedId] = useState<any>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [initialData, setInitialData] = useState<any>(null);
   const fetchFarms = async () => {
     setLoading(true);
-    const data = await getCollectionData("Farm");
-    setFarms(data);
+    const data = await getCollectionData("farms");
+    setData(data);
     setLoading(false);
   };
 
@@ -36,18 +34,26 @@ const farmFields = [
   }, []);
 
   const handleDelete = async (id: any) => {
-    await deleteDoc(doc(firestore, "Farm", id));
-    fetchFarms();
+    setSelectedId(id);
+    setShowAlert(true);
   };
 
   const handleEdit = (row: any) => {
-    // Implement your edit logic/modal here
-    alert("Edit: " + JSON.stringify(row));
+    setIsEditing(true);
+    setInitialData(row);
+    setSelectedId(row.id);
+    setFarmModalOpen(true);
   };
 
-  const columns = [{ key: "name", label: "Name" }];
+  const columns = [
+    { key: "name", label: "Farm Name" },
+    { key: "client", label: "Client" },
+  ];
 
-  if (loading) return <div>Loading...</div>;
+  const farmFields = [
+    { key: "name", label: "Farm Name", type: "text" as const },
+    { key: "client", label: "Client", type: "text" as const }
+  ];
 
   const handleAddFarm = () => {
     setFarmModalOpen(true);
@@ -55,12 +61,61 @@ const farmFields = [
 
   const handleCreateFarm = async (data: any) => {
     try {
-      await addDoc(collection(firestore, "Farm"), data);
+      await addDoc(collection(firestore, "farms"), data);
       fetchFarms();
     } catch (error) {
-        console.error("Error adding farm: ", error);
+      console.error("Error adding farm: ", error);
     }
-}
+  };
+
+  const handleUpdateFarm = async (data: any) => {
+    try {
+      console.log(data);
+      await updateDoc(doc(firestore, "farms", selectedId), data);
+      fetchFarms();
+      setFarmModalOpen(false);
+      setIsEditing(false);
+      setInitialData(null);
+    } catch (error) {
+      console.error("Error updating farms: ", error);
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    await deleteDoc(doc(firestore, "farms", selectedId));
+    fetchFarms();
+    setShowAlert(false);
+  };
+
+  if (showAlert) {
+    return (
+      <AlertDialog open={showAlert} onOpenChange={handleCloseAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Farm</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this famr?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              onClick={handleConfirmDelete}
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
+  }
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div>
@@ -76,18 +131,23 @@ const farmFields = [
           </Button>
         </div>
       </div>
+
       <CollectionTable
-        data={farms}
+        data={data}
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-      <CreateItemModal
+
+      <ItemModal
         isOpen={isFarmModalOpen}
         onClose={() => setFarmModalOpen(false)}
         onCreate={handleCreateFarm}
+        onUpdate={handleUpdateFarm}
         fields={farmFields}
-        title="Add New Farm"
+        title={isEditing ? "Farm Details" : "Add New Farm"}
+        isEditing={isEditing}
+        initialData={initialData}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { firestore } from '../firebase';
 import { collection, getCountFromServer, getDocs } from 'firebase/firestore';
 
 export async function getCollectionCounts() {
-  const collections = ['Farm', 'Supervisor', 'Activity', 'Labour'];
+  const collections = ['farms', 'supervisors', 'operations', 'labour'];
   const counts: Record<string, number> = {};
 
   await Promise.all(
