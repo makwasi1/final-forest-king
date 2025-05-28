@@ -12,12 +12,11 @@ export function RecentTransactions() {
 
   useEffect(() => {
       async function fetchSupervisorData() {
-        const querySnapshot = await getDocs(collection(firestore, 'supervisors'));
+        const querySnapshot = await getDocs(collection(firestore, 'supervisor'));
         const fetchedItems: any[] = [];
         querySnapshot.forEach((doc) => {
           fetchedItems.push({ id: doc.id, ...doc.data() });
         });
-        console.log(fetchedItems);
         setSupervisor(fetchedItems.slice(0, 5)); // Limit to 5 items
       }
       fetchSupervisorData();

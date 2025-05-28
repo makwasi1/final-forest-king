@@ -108,19 +108,19 @@ export function AnalyticsTab() {
           <CardContent className="space-y-4">
             <div>
               <p className="text-sm font-medium text-muted-foreground">Customer Lifetime Value</p>
-              <p className="text-2xl font-bold">$1,250</p>
+              <p className="text-2xl font-bold">ZAR 1,250</p>
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Net Promoter Score</p>
-              <p className="text-2xl font-bold">72</p>
+              <p className="text-2xl font-bold">ZAR 72</p>
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Customer Acquisition Cost</p>
-              <p className="text-2xl font-bold">$75</p>
+              <p className="text-2xl font-bold">75</p>
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Average Order Value</p>
-              <p className="text-2xl font-bold">$120</p>
+              <p className="text-2xl font-bold">ZAR 120</p>
             </div>
           </CardContent>
         </Card>
