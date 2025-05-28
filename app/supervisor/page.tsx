@@ -148,14 +148,14 @@ export default function SupervisorPage() {
    return (
      <div>
        <div className="flex items-center justify-between space-y-2 mb-4">
-         <h2 className="text-3xl font-bold tracking-tight">Supervisors</h2>
+         <h3 className="text-2xl font-bold tracking-tight">Supervisors</h3>
          <div className="flex items-center space-x-2">
            <Button
              onClick={handleAddFarm}
              className="flex items-center gap-2 bg-forest-600 hover:bg-forest-700"
            >
              <Plus className="h-4 w-4" />
-             Add New Supervisor
+             Add
            </Button>
          </div>
        </div>

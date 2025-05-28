@@ -28,7 +28,7 @@ export function RevenueChart() {
         <Card className="border-none shadow-lg">
           <CardContent className="p-2">
             <p className="text-sm font-semibold">{label}</p>
-            <p className="text-sm text-muted-foreground">Revenue: ${payload[0].value.toLocaleString()}</p>
+            <p className="text-sm text-muted-foreground">Revenue: {payload[0].value.toLocaleString()}</p>
           </CardContent>
         </Card>
       )
@@ -51,7 +51,7 @@ export function RevenueChart() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={(value) => `${value}`}
         />
         <Tooltip content={<CustomTooltip />} />
         <Line

@@ -112,15 +112,16 @@ export default function OperationsPage() {
 
   return (
     <div className="px-2 sm:px-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0 mb-6">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Operations</h2>
-        <div className="flex items-center">
+
+      <div className="flex items-center justify-between space-y-2 mb-4">
+        <h2 className="text-3xl font-bold tracking-tight">Operations</h2>
+        <div className="flex items-center space-x-2">
           <Button
             onClick={handleAddFarm}
-            className="flex items-center gap-2 bg-forest-600 hover:bg-forest-700 w-full sm:w-auto"
+            className="flex items-center gap-2 bg-forest-600 hover:bg-forest-700"
           >
             <Plus className="h-4 w-4" />
-            <span className="whitespace-nowrap">Add New Operation</span>
+            Add
           </Button>
         </div>
       </div>

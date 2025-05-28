@@ -16,7 +16,7 @@ export function OverviewTab() {
   return (
     <>
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-2xl font-semibold">Dashboard Overview</h3>
+        <h3 className="text-2xl font-semibold"></h3>
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Compare to:</span>
           <Select value={comparisonPeriod} onValueChange={setComparisonPeriod}>
@@ -63,7 +63,7 @@ export function OverviewTab() {
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Top Products</CardTitle>
+            <CardTitle className="text-xl font-semibold">Top Operations</CardTitle>
           </CardHeader>
           <CardContent>
             <TopProducts />

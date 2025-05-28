@@ -23,9 +23,9 @@ import { ForestLogo } from "./forest-logo"
 const navigation = [
   { name: "Dashboard", href: "/analytics", icon: Home },
   { name: "Farms", href: "/farm", icon: Folder },
-  { name: "Transactions", href: "/transactions", icon: Wallet },
+  // { name: "Transactions", href: "/transactions", icon: Wallet },
   { name: "Operations", href: "/activity", icon: Receipt },
-  { name: "Payments", href: "/payments", icon: CreditCard },
+  // { name: "Payments", href: "/payments", icon: CreditCard },
   { name: "Supervisors", href: "/supervisor", icon: Users2 },
 ];
 
